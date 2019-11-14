@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 protocol BooksListBusinessLogic
 {
@@ -16,12 +17,12 @@ protocol BooksListBusinessLogic
 
 protocol BooksListDataStore
 {
-    var bookResponse: BooksList.Response? { get set }
+    var bookResponse: BookResponse? { get set }
 }
 
 class BooksListInteractor: BooksListBusinessLogic, BooksListDataStore
 {
-    var bookResponse: BooksList.Response?
+    var bookResponse: BookResponse?
     var presenter: BooksListPresentationLogic?
     
     // MARK: Do something
@@ -33,17 +34,36 @@ class BooksListInteractor: BooksListBusinessLogic, BooksListDataStore
             switch response.result {
             case .success:
                 if response.result.value != nil {
-                let jsonString = String(data: response.data!, encoding: .utf8)!
-                if let responseData = BooksList.Response(JSONString: jsonString){
-                    self.bookResponse = responseData
-                    self.presenter?.PresentData(response: responseData)
-                }else{
-                    
+                    let jsonString = String(data: response.data!, encoding: .utf8)!
+                    print(jsonString)
+                    if let responseData = BookResponse(JSONString: jsonString){
+                        print(responseData)
+                        let realm = try! Realm()
+                        realm.beginWrite()
+                        realm.add(responseData, update: Realm.UpdatePolicy.modified)
+                        if realm.isInWriteTransaction {
+                            try! realm.commitWrite()
+                        }
+                        self.bookResponse = responseData
+                        self.presenter?.PresentData(response: responseData)
+                    }else{
+                        let realm = try! Realm()
+                        let results =  realm.objects(BookResponse.self)
+                        if let data = results.first{
+                            self.bookResponse = data
+                            self.presenter?.PresentData(response: data)
+                        }
+                        self.presenter?.presentError(message: response.description)
                     }
                 }
             case .failure(let error):
-                print(error)
-
+                let realm = try! Realm()
+                let results =  realm.objects(BookResponse.self)
+                if let data = results.first{
+                    self.bookResponse = data
+                    self.presenter?.PresentData(response: data)
+                }
+                self.presenter?.presentError(message: error.localizedDescription)
             }
         }
     }

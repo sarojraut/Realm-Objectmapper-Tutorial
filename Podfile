@@ -6,11 +6,12 @@ target 'Test Project' do
   use_frameworks!
 
   # Pods for Test Project
-	pod 'Alamofire'
-	pod 'SDWebImage'
+	  pod 'Alamofire'
+	  pod 'SDWebImage'
   	pod 'RealmSwift'
-  	pod 'AlamofireObjectMapper'
   	pod 'ObjectMapper'
+    pod "ObjectMapper+Realm"
+    pod "RMessage"
 
   target 'Test ProjectTests' do
     # Pods for testing
@@ -18,11 +19,10 @@ target 'Test Project' do
 
 	
   end
+end
 
-  target 'Test ProjectUITests' do
-    inherit! :search_paths
-
-    # Pods for testing
-  end
-
+target 'Test ProjectUITests' do
+  inherit! :search_paths
+  
+  # Pods for testing
 end

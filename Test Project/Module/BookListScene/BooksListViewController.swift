@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RMessage
 
 protocol BooksListDisplayLogic: class
 {
@@ -19,15 +20,10 @@ class BooksListViewController: UIViewController, BooksListDisplayLogic
     var interactor: BooksListBusinessLogic?
     var router: (NSObjectProtocol & BooksListRoutingLogic & BooksListDataPassing)?
     var viewModel:BooksList.ViewModel?
-    @IBOutlet weak var tableView: UITableView!
+    let tableView = UITableView()
+    var selectedRow = 0
+    var activityView = UIActivityIndicatorView(style: .gray)
     // MARK: Object lifecycle
-    
-    required init?(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)
-        self.configure()
-    }
-    
     func configure(){
         let interactor = BooksListInteractor()
         let presenter = BooksListPresenter()
@@ -41,27 +37,50 @@ class BooksListViewController: UIViewController, BooksListDisplayLogic
     }
         
     // MARK: View lifecycle
+    
+    override func loadView() {
+        super.loadView()
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.separatorStyle = .none
-        tableView.register(UINib(nibName: "BookCell", bundle: Bundle.main), forCellReuseIdentifier: "BookCellID")
-        
-        tableView.estimatedRowHeight = 60.0
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.tableFooterView = UIView()
+        self.configure()
+        setUpTableView()
+        activityView.startAnimating()
         self.interactor?.makeRequest()
     }
     
+    func setUpTableView(){
+        self.title = "BOOK LIST"
+        view.addSubview(tableView)
+        activityView.center = self.view.center
+        self.view.addSubview(activityView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.separatorStyle = .singleLineEtched
+        tableView.register(UINib(nibName: "BookCell", bundle: Bundle.main), forCellReuseIdentifier: "BookCellID")
+        tableView.tableFooterView = UIView()
+    }
+    
     func displayData(viewModel: BooksList.ViewModel){
+        
+        activityView.stopAnimating()
         self.viewModel = viewModel
         self.tableView.reloadData()
     }
     
     func displayError(message:String){
-        
+        activityView.stopAnimating()
+
+        RMessage.showNotification(in: self, title: "", subtitle: message , type: .warning, customTypeName: "", duration: 3, callback: {
+
+            }, canBeDismissedByUser: true)
     }
     
 }
@@ -81,8 +100,15 @@ extension BooksListViewController:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
+        self.router?.routeToBookDetails()
     }
+    
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     
 }

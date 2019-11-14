@@ -10,7 +10,7 @@ import UIKit
 
 @objc protocol BooksListRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToBookDetails()
 }
 
 protocol BooksListDataPassing
@@ -25,32 +25,20 @@ class BooksListRouter: NSObject, BooksListRoutingLogic, BooksListDataPassing
   
   // MARK: Routing
   
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+  func routeToBookDetails()
+  {
+      let storyboard = UIStoryboard(name: "BookDetails", bundle: nil)
+      let destinationVC = storyboard.instantiateViewController(withIdentifier: "BookDetailsViewController") as! BookDetailsViewController
+      destinationVC.data = dataStore!.bookResponse?.items[(viewController?.selectedRow)!]
+      navigateToBookDetails(source: viewController!, destination: destinationVC)
+  }
 
   // MARK: Navigation
   
-  //func navigateToSomewhere(source: BooksListViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
+  func navigateToBookDetails(source: BooksListViewController, destination: BookDetailsViewController)
+  {
+    source.show(destination, sender: nil)
+  }
   
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: BooksListDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
 }
+

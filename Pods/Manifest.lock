@@ -1,42 +1,54 @@
 PODS:
   - Alamofire (4.9.1)
-  - AlamofireObjectMapper (5.2.1):
-    - Alamofire (~> 4.7)
-    - ObjectMapper (~> 3.4)
+  - HexColors (4.0.0)
   - ObjectMapper (3.5.1)
+  - "ObjectMapper+Realm (1.0)":
+    - ObjectMapper
+    - RealmSwift
+  - PPTopMostController (0.0.1)
   - Realm (4.0.0):
     - Realm/Headers (= 4.0.0)
   - Realm/Headers (4.0.0)
   - RealmSwift (4.0.0):
     - Realm (= 4.0.0)
+  - RMessage (2.3.2):
+    - HexColors (~> 4.0)
+    - PPTopMostController
   - SDWebImage (5.3.1):
     - SDWebImage/Core (= 5.3.1)
   - SDWebImage/Core (5.3.1)
 
 DEPENDENCIES:
   - Alamofire
-  - AlamofireObjectMapper
   - ObjectMapper
+  - "ObjectMapper+Realm"
   - RealmSwift
+  - RMessage
   - SDWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - AlamofireObjectMapper
+    - HexColors
     - ObjectMapper
+    - "ObjectMapper+Realm"
+    - PPTopMostController
     - Realm
     - RealmSwift
+    - RMessage
     - SDWebImage
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
+  HexColors: 5f95843ef89aff6a72e1fd3a8ebabf205cc43379
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
+  "ObjectMapper+Realm": bd713d57132bf05880a656695137764692f7d2bb
+  PPTopMostController: 4e6f1e5f8c645bdcc74cd837a20f607ff262c048
   Realm: 0c5b8f398daeec5b29824e41c453ff9e126e31d8
   RealmSwift: 02e1f604f7091ec535145055764ca53efa8cdc92
+  RMessage: 761f8ff71247b8d72d0c4a0be5a8e6ce8dfdedd0
   SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
 
-PODFILE CHECKSUM: 299d9c226ab985e8b51294fdd5ef092d8dc08075
+PODFILE CHECKSUM: 520f0c15eeaca9e3470cb2c2de17021277fd2e61
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.7.1

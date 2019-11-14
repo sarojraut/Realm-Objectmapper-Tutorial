@@ -8,58 +8,70 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
+import ObjectMapper_Realm
 
 enum BooksList
 {
-    struct Response:Mappable
-    {
-        var kind : String?
-        var totalItems : Int?
-        var items : [Items]?
-
-        init?(map: Map) {
-
-        }
-
-        mutating func mapping(map: Map) {
-
-            kind <- map["kind"]
-            totalItems <- map["totalItems"]
-            items <- map["items"]
-        }
-    }
-    
     struct ViewModel
     {
         var BookList:[BooksDetail]?
     }
     
     struct BooksDetail {
-        var bookTitle:String?
-        var bookDescription:String?
-        var bookImageUrl:String?
+        var bookTitle:String = ""
+        var bookDescription:String = ""
+        var bookImageUrl:String = ""
     }
 }
 
 
-
-struct Items : Mappable {
-    var kind : String?
-    var id : String?
-    var etag : String?
-    var selfLink : String?
-    var volumeInfo : VolumeInfo?
-    var country : String?
-    var saleability : String?
-    var isEbook : Bool?
-    var accessInfo : AccessInfo?
-    var textSnippet : String?
-
-    init?(map: Map) {
-
+//MARK: Response Model
+class  BookResponse:Object,Mappable
+{
+    @objc dynamic var kind : String = ""
+    @objc dynamic var totalItems : Int = 0
+    var items = List<Items>()
+    
+    required convenience init?(map: Map) {
+        self.init()
     }
+    
+    override class func primaryKey() -> String {
+        return "kind"
+    }
+    
+    func mapping(map: Map) {
+        
+        kind <- map["kind"]
+        totalItems <- map["totalItems"]
+        items <- (map["items"], ListTransform<Items>())
+    }
+}
 
-    mutating func mapping(map: Map) {
+//MARK: Items Model
+
+class Items:Object,Mappable {
+    @objc dynamic var kind : String = ""
+    @objc dynamic var id : String = ""
+    @objc dynamic var etag : String = ""
+    @objc dynamic var selfLink : String = ""
+    @objc dynamic var volumeInfo : VolumeInfo?
+    @objc dynamic var country : String = ""
+    @objc dynamic var saleability : String = ""
+    @objc dynamic var isEbook : Bool = false
+    @objc dynamic var accessInfo : AccessInfo?
+    @objc dynamic var textSnippet : String = ""
+
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    override class func primaryKey() -> String {
+        return "id"
+    }
+    
+     func mapping(map: Map) {
         kind <- map["kind"]
         id <- map["id"]
         etag <- map["etag"]
@@ -73,57 +85,46 @@ struct Items : Mappable {
     }
 }
 
-struct IndustryIdentifiers : Mappable {
-    var type : String?
-    var identifier : String?
 
-    init?(map: Map) {
 
+
+class VolumeInfo:Object,Mappable {
+    @objc dynamic var title : String = ""
+    @objc dynamic var subtitle : String = ""
+    var authors : Array<String> = Array<String>()
+    @objc dynamic var publisher : String = ""
+    @objc dynamic var publishedDate : String = ""
+    var industryIdentifiers  = List<IndustryIdentifiers>()
+    @objc dynamic var pageCount : Int = 0
+    @objc dynamic var printType : String = ""
+    @objc dynamic var averageRating : Double = 0.0
+    @objc dynamic var ratingsCount : Int = 0
+    @objc dynamic var maturityRating : String = ""
+    @objc dynamic var allowAnonLogging : Bool = false
+    @objc dynamic var contentVersion : String = ""
+    @objc dynamic var panelizationSummary : PanelizationSummary?
+    @objc dynamic var imageLinks : ImageLinks?
+    @objc dynamic var language : String = ""
+    @objc dynamic var previewLink : String = ""
+    @objc dynamic var infoLink : String = ""
+    @objc dynamic var canonicalVolumeLink : String = ""
+
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    override class func primaryKey() -> String {
+        return "title"
     }
 
-    mutating func mapping(map: Map) {
-
-        type <- map["type"]
-        identifier <- map["identifier"]
-    }
-
-}
-
-
-
-struct VolumeInfo : Mappable {
-    var title : String?
-    var subtitle : String?
-    var authors : [String]?
-    var publisher : String?
-    var publishedDate : String?
-    var industryIdentifiers : [IndustryIdentifiers]?
-    var pageCount : Int?
-    var printType : String?
-    var averageRating : Double?
-    var ratingsCount : Int?
-    var maturityRating : String?
-    var allowAnonLogging : Bool?
-    var contentVersion : String?
-    var panelizationSummary : PanelizationSummary?
-    var imageLinks : ImageLinks?
-    var language : String?
-    var previewLink : String?
-    var infoLink : String?
-    var canonicalVolumeLink : String?
-
-    init?(map: Map) {
-
-    }
-
-    mutating func mapping(map: Map) {
+     func mapping(map: Map) {
 
         title <- map["title"]
         subtitle <- map["subtitle"]
         authors <- map["authors"]
         publisher <- map["publisher"]
         publishedDate <- map["publishedDate"]
-        industryIdentifiers <- map["industryIdentifiers"]
+        industryIdentifiers <- (map["industryIdentifiers"], ListTransform<IndustryIdentifiers>())
         pageCount <- map["pageCount"]
         printType <- map["printType"]
         averageRating <- map["averageRating"]
@@ -142,14 +143,35 @@ struct VolumeInfo : Mappable {
 }
 
 
-struct Pdf : Mappable {
-    var isAvailable : Bool?
+class IndustryIdentifiers:Object,Mappable {
+    @objc dynamic var type : String = ""
+    @objc dynamic var identifier : String = ""
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+   
+    
+    func mapping(map: Map) {
+        
+        type <- map["type"]
+        identifier <- map["identifier"]
+    }
+    
+}
 
-    init?(map: Map) {
 
+class Pdf:Object,Mappable {
+    @objc dynamic var isAvailable : Bool = false
+
+    required convenience init?(map: Map) {
+        self.init()
     }
 
-    mutating func mapping(map: Map) {
+   
+    
+     func mapping(map: Map) {
 
         isAvailable <- map["isAvailable"]
     }
@@ -157,15 +179,15 @@ struct Pdf : Mappable {
 }
 
 
-struct PanelizationSummary : Mappable {
-    var containsEpubBubbles : Bool?
-    var containsImageBubbles : Bool?
+class PanelizationSummary:Object,Mappable {
+    @objc dynamic var containsEpubBubbles : Bool = false
+    @objc dynamic var containsImageBubbles : Bool = false
 
-    init?(map: Map) {
-
-    }
-
-    mutating func mapping(map: Map) {
+    required convenience init?(map: Map) {
+        self.init()
+    }    
+    
+     func mapping(map: Map) {
 
         containsEpubBubbles <- map["containsEpubBubbles"]
         containsImageBubbles <- map["containsImageBubbles"]
@@ -173,26 +195,25 @@ struct PanelizationSummary : Mappable {
 
 }
 
+class AccessInfo:Object,Mappable {
+    @objc dynamic var country : String = ""
+    @objc dynamic var viewability : String = ""
+    @objc dynamic var embeddable : Bool = false
+    @objc dynamic var publicDomain : Bool = false
+    @objc dynamic var textToSpeechPermission : String = ""
+    @objc dynamic var epub : Epub?
+    @objc dynamic var pdf : Pdf?
+    @objc dynamic var webReaderLink : String = ""
+    @objc dynamic var accessViewStatus : String = ""
+    @objc dynamic var quoteSharingAllowed : Bool = false
 
-
-
-struct AccessInfo : Mappable {
-    var country : String?
-    var viewability : String?
-    var embeddable : Bool?
-    var publicDomain : Bool?
-    var textToSpeechPermission : String?
-    var epub : Epub?
-    var pdf : Pdf?
-    var webReaderLink : String?
-    var accessViewStatus : String?
-    var quoteSharingAllowed : Bool?
-
-    init?(map: Map) {
-
+    required convenience init?(map: Map) {
+        self.init()
     }
+    
+    
 
-    mutating func mapping(map: Map) {
+     func mapping(map: Map) {
 
         country <- map["country"]
         viewability <- map["viewability"]
@@ -209,15 +230,15 @@ struct AccessInfo : Mappable {
 }
 
 
-struct ImageLinks : Mappable {
-    var smallThumbnail : String?
-    var thumbnail : String?
+class ImageLinks:Object,Mappable {
+    @objc dynamic var smallThumbnail : String = ""
+    @objc dynamic var thumbnail : String = ""
 
-    init?(map: Map) {
-
+    required convenience init?(map: Map) {
+        self.init()
     }
-
-    mutating func mapping(map: Map) {
+   
+     func mapping(map: Map) {
 
         smallThumbnail <- map["smallThumbnail"]
         thumbnail <- map["thumbnail"]
@@ -227,17 +248,47 @@ struct ImageLinks : Mappable {
 
 
 
-struct Epub : Mappable {
-    var isAvailable : Bool?
-
-    init?(map: Map) {
-
+class Epub:Object,Mappable {
+    @objc dynamic var isAvailable : Bool = false
+    
+    required convenience init?(map: Map) {
+        self.init()
     }
-
-    mutating func mapping(map: Map) {
+    
+     func mapping(map: Map) {
 
         isAvailable <- map["isAvailable"]
     }
 
 }
 
+
+
+
+class ListTransform<T:RealmSwift.Object> : TransformType where T:Mappable {
+    typealias Object = List<T>
+    typealias JSON = [AnyObject]
+    
+    let mapper = Mapper<T>()
+    
+    func transformFromJSON(_ value: Any?) -> Object? {
+        let results = List<T>()
+        if let objects = mapper.mapArray(JSONObject: value) {
+            for object in objects {
+                results.append(object)
+            }
+        }
+        return results
+    }
+    
+    func transformToJSON(_ value: Object?) -> JSON? {
+        var results = [AnyObject]()
+        if let value = value {
+            for obj in value {
+                let json = mapper.toJSON(obj)
+                results.append(json as AnyObject)
+            }
+        }
+        return results
+    }
+}
