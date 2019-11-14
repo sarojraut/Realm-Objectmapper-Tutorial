@@ -20,10 +20,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkg-h9-cwn">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="297.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="369"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5Q-4F-qVZ">
-                                                <rect key="frame" x="20" y="257" width="374" height="20.5"/>
+                                                <rect key="frame" x="20" y="269" width="374" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -42,22 +42,39 @@
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fe4-NY-Pxs">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" red="0.89033069349315064" green="0.95341930650684936" blue="0.97798052226027399" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="qKi-8p-C52"/>
                                                 </constraints>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDj-a7-DvM">
+                                                <rect key="frame" x="361.5" y="340.5" width="44.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuV-h7-Cc7">
+                                                <rect key="frame" x="8" y="340.5" width="333.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="A5Q-4F-qVZ" secondAttribute="trailing" constant="20" id="4TX-ZZ-YNj"/>
+                                            <constraint firstAttribute="trailing" secondItem="CDj-a7-DvM" secondAttribute="trailing" constant="8" id="4nq-xg-WeH"/>
                                             <constraint firstAttribute="trailing" secondItem="fe4-NY-Pxs" secondAttribute="trailing" id="Edy-cY-44q"/>
                                             <constraint firstItem="NcO-l5-kkS" firstAttribute="leading" secondItem="Jkg-h9-cwn" secondAttribute="leading" constant="20" id="IMd-vd-cFu"/>
                                             <constraint firstItem="A5Q-4F-qVZ" firstAttribute="leading" secondItem="Jkg-h9-cwn" secondAttribute="leading" constant="20" id="JPh-t2-Loq"/>
                                             <constraint firstAttribute="trailing" secondItem="NcO-l5-kkS" secondAttribute="trailing" constant="20" id="Mub-IQ-EzU"/>
-                                            <constraint firstItem="A5Q-4F-qVZ" firstAttribute="top" secondItem="NcO-l5-kkS" secondAttribute="bottom" constant="8" id="NjH-GS-bEV"/>
-                                            <constraint firstAttribute="bottom" secondItem="A5Q-4F-qVZ" secondAttribute="bottom" constant="20" id="T73-HR-cf8"/>
+                                            <constraint firstItem="A5Q-4F-qVZ" firstAttribute="top" secondItem="NcO-l5-kkS" secondAttribute="bottom" constant="20" id="NjH-GS-bEV"/>
+                                            <constraint firstItem="kuV-h7-Cc7" firstAttribute="top" secondItem="CDj-a7-DvM" secondAttribute="top" id="QMz-U0-i3R"/>
+                                            <constraint firstAttribute="bottom" secondItem="kuV-h7-Cc7" secondAttribute="bottom" constant="8" id="XKk-0u-O1M"/>
+                                            <constraint firstItem="kuV-h7-Cc7" firstAttribute="top" secondItem="A5Q-4F-qVZ" secondAttribute="bottom" constant="51" id="cWk-3Z-iLP"/>
                                             <constraint firstItem="fe4-NY-Pxs" firstAttribute="leading" secondItem="Jkg-h9-cwn" secondAttribute="leading" id="ksZ-uB-XPh"/>
+                                            <constraint firstItem="kuV-h7-Cc7" firstAttribute="leading" secondItem="Jkg-h9-cwn" secondAttribute="leading" constant="8" id="sHe-bi-DZQ"/>
+                                            <constraint firstItem="CDj-a7-DvM" firstAttribute="leading" secondItem="kuV-h7-Cc7" secondAttribute="trailing" constant="20" id="vly-FG-UXW"/>
                                             <constraint firstItem="NcO-l5-kkS" firstAttribute="top" secondItem="fe4-NY-Pxs" secondAttribute="bottom" constant="20" id="w9f-7a-MfJ"/>
                                             <constraint firstItem="fe4-NY-Pxs" firstAttribute="top" secondItem="Jkg-h9-cwn" secondAttribute="top" id="yeq-WR-fQ0"/>
                                         </constraints>
@@ -86,7 +103,9 @@
                         <viewLayoutGuide key="safeArea" id="phb-TE-1sE"/>
                     </view>
                     <connections>
+                        <outlet property="authorLabel" destination="kuV-h7-Cc7" id="pNt-QT-SIj"/>
                         <outlet property="bookImageView" destination="fe4-NY-Pxs" id="L82-ob-4NY"/>
+                        <outlet property="dateLabel" destination="CDj-a7-DvM" id="mzV-mm-lSh"/>
                         <outlet property="descriptionOfBookLabel" destination="A5Q-4F-qVZ" id="YWO-hV-icN"/>
                         <outlet property="titleOfBookLabel" destination="NcO-l5-kkS" id="DhY-87-eM9"/>
                     </connections>

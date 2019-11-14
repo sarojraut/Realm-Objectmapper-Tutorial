@@ -92,8 +92,8 @@ class VolumeInfo:Object,Mappable {
     @objc dynamic var title : String = ""
     @objc dynamic var subtitle : String = ""
     var authors : Array<String> = Array<String>()
-    @objc dynamic var publisher : String = ""
-    @objc dynamic var publishedDate : String = ""
+    @objc dynamic var publisher : String = "Unknown"
+    @objc dynamic var publishedDate : String = "Unknown"
     var industryIdentifiers  = List<IndustryIdentifiers>()
     @objc dynamic var pageCount : Int = 0
     @objc dynamic var printType : String = ""
