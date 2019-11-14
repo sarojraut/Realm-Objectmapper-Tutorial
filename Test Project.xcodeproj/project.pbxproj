@@ -184,7 +184,7 @@
 		5035EF4C237C3D740096CBFF /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				847D4E66237D562700E7065C /* BookDetails */,
+				847D4E66237D562700E7065C /* BookDetailsScene */,
 				5035EF4D237C3D7D0096CBFF /* BookListScene */,
 			);
 			path = Module;
@@ -236,13 +236,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		847D4E66237D562700E7065C /* BookDetails */ = {
+		847D4E66237D562700E7065C /* BookDetailsScene */ = {
 			isa = PBXGroup;
 			children = (
 				847D4E6B237D59C400E7065C /* BookDetailsViewController.swift */,
 				847D4E75237D5BCA00E7065C /* BookDetails.storyboard */,
 			);
-			path = BookDetails;
+			path = BookDetailsScene;
 			sourceTree = "<group>";
 		};
 		847D4E80237D720D00E7065C /* BooksListTest */ = {

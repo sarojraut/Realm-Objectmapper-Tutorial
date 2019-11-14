@@ -54,7 +54,6 @@ class BooksListViewControllerTests: XCTestCase
         makeRequestCalled = true
     }
     
-  
   }
   
   // MARK: Tests

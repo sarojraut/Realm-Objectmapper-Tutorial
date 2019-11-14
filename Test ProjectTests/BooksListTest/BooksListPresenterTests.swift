@@ -49,13 +49,12 @@ class BooksListPresenterTests: XCTestCase
     func displayError(message: String) {
         
     }
-    
    
   }
   
   // MARK: Tests
   
-  func testPresentSomething()
+  func testPresentData()
   {
     // Given
     let spy = BooksListDisplayLogicSpy()
