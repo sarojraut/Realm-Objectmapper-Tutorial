@@ -45,7 +45,7 @@ class  BookResponse:Object,Mappable
         
         kind <- map["kind"]
         totalItems <- map["totalItems"]
-        items <- (map["items"], ListTransform<Items>())
+        items <- (map["items"], ListTransform<Items>()) //Don't forget to use listtransform
     }
 }
 
