@@ -1,4 +1,4 @@
-# Test-Project
+# Realm + Objectmapper Tutorial
 
 To clone the repository using HTTPS, under "Clone with HTTPS", click . 
 To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, 
